@@ -1,4 +1,4 @@
-package com.github.RuSichPT.TestParientMicroservice.entities;
+package com.github.RuSichPT.TestPatientMicroservice.entities;
 
 import java.sql.Date;
 

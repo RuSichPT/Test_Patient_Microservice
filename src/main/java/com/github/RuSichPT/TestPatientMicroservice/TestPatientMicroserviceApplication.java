@@ -1,13 +1,13 @@
-package com.github.RuSichPT.TestParientMicroservice;
+package com.github.RuSichPT.TestPatientMicroservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TestParientMicroserviceApplication {
+public class TestPatientMicroserviceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TestParientMicroserviceApplication.class, args);
+		SpringApplication.run(TestPatientMicroserviceApplication.class, args);
 	}
 
 }

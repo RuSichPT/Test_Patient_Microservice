@@ -1,6 +1,6 @@
-package com.github.RuSichPT.TestParientMicroservice.mappers;
+package com.github.RuSichPT.TestPatientMicroservice.mappers;
 
-import com.github.RuSichPT.TestParientMicroservice.entities.Patient;
+import com.github.RuSichPT.TestPatientMicroservice.entities.Patient;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
-package com.github.RuSichPT.TestParientMicroservice.services;
+package com.github.RuSichPT.TestPatientMicroservice.services;
 
-import com.github.RuSichPT.TestParientMicroservice.entities.Patient;
+import com.github.RuSichPT.TestPatientMicroservice.entities.Patient;
 
 public interface PatientService {
 
