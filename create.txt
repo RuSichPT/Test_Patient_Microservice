@@ -1,0 +1,21 @@
+{
+	"firstName":"Олег",
+	"midName":"Дмитриевич",
+	"lastName":"Соловьев",
+	"genderId":1,
+	"birthday":"1989-25-10",
+	"phone":"+7950558****",
+	"email":"dmitrSolo****@gmail.com",
+	"address":"Вологда"
+}
+
+{
+	"firstName":"Павел",
+	"midName":"Андреевич",
+	"lastName":"Токарев",
+	"genderId":1,
+	"birthday":"1996-07-12",
+	"phone":"+7952558****",
+	"email":"tokarev*********@mail.ru",
+	"address":"Воронеж"
+}
