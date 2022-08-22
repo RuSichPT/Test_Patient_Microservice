@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.github.RuSichPT</groupId>
-	<artifactId>TestParientMicroservice</artifactId>
+	<artifactId>TestPatientMicroservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>TestParientMicroservice</name>
+	<name>TestPatientMicroservice</name>
 	<description>RESTful app</description>
 	<properties>
 		<java.version>17</java.version>
