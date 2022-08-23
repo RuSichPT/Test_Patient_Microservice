@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.sql.Date;
+
 @Service
 public class PatientServiceImpl implements PatientService{
 
@@ -23,17 +25,21 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Override
-    public Patient select(String firstName, String midName, String lastName) {
-        return patientMapper.selectByName(firstName, midName, lastName);
+    public Patient select(String firstName, String midName, String lastName, Date birthday) {
+        return patientMapper.selectByName(firstName, midName, lastName, birthday);
     }
 
     @Override
     public void update(int id, Patient newPatient) {
         Patient oldPatient = patientMapper.selectById(id);
 
-        if (id != newPatient.getId() || (oldPatient == null))
+        if (oldPatient == null)
         {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        else if (newPatient.equals(oldPatient))
+        {
+            return;
         }
 
         patientMapper.update(newPatient);

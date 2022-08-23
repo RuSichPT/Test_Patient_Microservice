@@ -4,6 +4,8 @@ import com.github.RuSichPT.TestPatientMicroservice.entities.Patient;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
+
 @Mapper
 @Repository
 public interface PatientMapper {
@@ -13,11 +15,16 @@ public interface PatientMapper {
             "( NEXTVAL('patient_seq'), #{firstName}, #{midName}, #{lastName}, #{genderId}, #{birthday}, #{phone}, #{email}, #{address} );")
     void insert(Patient patient);
 
-    @Select("SELECT * FROM \"patient\" WHERE ID = #{id};")
+    @Select("SELECT " +
+            "ID, FIRST_NAME, MID_NAME, LAST_NAME, GENDER_ID, BIRTHDAY, PHONE, EMAIL, ADDRESS" +
+            " FROM \"patient\" WHERE ID = #{id};")
     Patient selectById(int id);
 
-    @Select("SELECT * FROM \"patient\" WHERE FIRST_NAME = #{firstName} AND MID_NAME = #{midName} AND LAST_NAME = #{lastName};")
-    Patient selectByName(String firstName, String midName, String lastName);
+    @Select("SELECT " +
+            "ID, FIRST_NAME, MID_NAME, LAST_NAME, GENDER_ID, BIRTHDAY, PHONE, EMAIL, ADDRESS" +
+            " FROM \"patient\" WHERE " +
+            "FIRST_NAME = #{firstName} AND MID_NAME = #{midName} AND LAST_NAME = #{lastName} AND BIRTHDAY = #{birthday};")
+    Patient selectByName(String firstName, String midName, String lastName, Date birthday);
     @Update("UPDATE \"patient\" " +
             "SET " +
             "FIRST_NAME = #{firstName}, " +

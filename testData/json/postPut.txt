@@ -1,3 +1,4 @@
+post
 {
 	"firstName":"Олег",
 	"midName":"Дмитриевич",
@@ -9,7 +10,9 @@
 	"address":"Вологда"
 }
 
+put
 {
+    "id":9,
 	"firstName":"Павел",
 	"midName":"Андреевич",
 	"lastName":"Токарев",

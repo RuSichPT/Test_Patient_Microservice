@@ -1,6 +1,7 @@
 package com.github.RuSichPT.TestPatientMicroservice.entities;
 
 import java.sql.Date;
+import java.util.Objects;
 
 public class Patient {
     private int id;
@@ -106,5 +107,18 @@ public class Patient {
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Patient patient = (Patient) o;
+        return id == patient.id && genderId == patient.genderId && Objects.equals(firstName, patient.firstName) && Objects.equals(midName, patient.midName) && Objects.equals(lastName, patient.lastName) && Objects.equals(birthday, patient.birthday) && Objects.equals(phone, patient.phone) && Objects.equals(email, patient.email) && Objects.equals(address, patient.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, midName, lastName, genderId, birthday, phone, email, address);
     }
 }

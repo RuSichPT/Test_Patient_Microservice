@@ -2,10 +2,13 @@ package com.github.RuSichPT.TestPatientMicroservice.controllers;
 
 import com.github.RuSichPT.TestPatientMicroservice.entities.Patient;
 import com.github.RuSichPT.TestPatientMicroservice.services.PatientServiceImpl;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.sql.Date;
 
 @RestController
 @RequestMapping("patient")
@@ -15,9 +18,17 @@ public class PatientController {
     private PatientServiceImpl patientService;
 
     @PostMapping
-    public void insertPatient(@RequestBody Patient order)
+    public void insertPatient(@RequestBody Patient newPatient)
     {
-        patientService.insert(order);
+        Patient oldPatient = patientService.select(newPatient.getFirstName(), newPatient.getMidName(), newPatient.getLastName(), newPatient.getBirthday());
+        if (oldPatient == null)
+        {
+            patientService.insert(newPatient);
+        }
+        else
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping(path = "{id}")
@@ -31,10 +42,10 @@ public class PatientController {
         return patient;
     }
 
-    @GetMapping(path = "{firstName}/{midName}/{lastName}")
-    public Patient selectPatient(@PathVariable String firstName, @PathVariable String midName, @PathVariable String lastName)
+    @GetMapping()
+    public Patient selectPatient(@RequestParam String firstName, @RequestParam String midName, @RequestParam String lastName, @RequestParam Date birthday)
     {
-        Patient patient = patientService.select(firstName, midName, lastName);
+        Patient patient = patientService.select(firstName, midName, lastName, birthday);
 
         if (patient == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -45,6 +56,10 @@ public class PatientController {
     @PutMapping(path = "{id}")
     public void updatePatient(@PathVariable int id, @RequestBody Patient patient)
     {
+        if (id != patient.getId())
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
         patientService.update(id, patient);
     }
 
