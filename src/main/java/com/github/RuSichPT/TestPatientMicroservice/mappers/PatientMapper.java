@@ -16,15 +16,21 @@ public interface PatientMapper {
     void insert(Patient patient);
 
     @Select("SELECT " +
-            "ID, FIRST_NAME, MID_NAME, LAST_NAME, GENDER_ID, BIRTHDAY, PHONE, EMAIL, ADDRESS" +
-            " FROM \"patient\" WHERE ID = #{id};")
+            "ID, FIRST_NAME, MID_NAME, LAST_NAME, GENDER_ID, BIRTHDAY, PHONE, EMAIL, ADDRESS " +
+            "FROM \"patient\" WHERE ID = CURRVAL('patient_seq');")
+    Patient selectCurrentPatient();
+
+    @Select("SELECT " +
+            "ID, FIRST_NAME, MID_NAME, LAST_NAME, GENDER_ID, BIRTHDAY, PHONE, EMAIL, ADDRESS " +
+            "FROM \"patient\" WHERE ID = #{id};")
     Patient selectById(int id);
 
     @Select("SELECT " +
-            "ID, FIRST_NAME, MID_NAME, LAST_NAME, GENDER_ID, BIRTHDAY, PHONE, EMAIL, ADDRESS" +
-            " FROM \"patient\" WHERE " +
+            "ID, FIRST_NAME, MID_NAME, LAST_NAME, GENDER_ID, BIRTHDAY, PHONE, EMAIL, ADDRESS " +
+            "FROM \"patient\" WHERE " +
             "FIRST_NAME = #{firstName} AND MID_NAME = #{midName} AND LAST_NAME = #{lastName} AND BIRTHDAY = #{birthday};")
     Patient selectByName(String firstName, String midName, String lastName, Date birthday);
+
     @Update("UPDATE \"patient\" " +
             "SET " +
             "FIRST_NAME = #{firstName}, " +

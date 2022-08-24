@@ -18,16 +18,16 @@ public class PatientController {
     private PatientServiceImpl patientService;
 
     @PostMapping
-    public void insertPatient(@RequestBody Patient newPatient)
+    public Patient insertPatient(@RequestBody Patient newPatient)
     {
         Patient oldPatient = patientService.select(newPatient.getFirstName(), newPatient.getMidName(), newPatient.getLastName(), newPatient.getBirthday());
         if (oldPatient == null)
         {
-            patientService.insert(newPatient);
+            return patientService.insert(newPatient);
         }
         else
         {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            return oldPatient;
         }
     }
 
@@ -36,9 +36,11 @@ public class PatientController {
     {
         Patient patient = patientService.select(id);
 
-        if (patient == null) {
+        if (patient == null)
+        {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
+
         return patient;
     }
 
@@ -47,20 +49,18 @@ public class PatientController {
     {
         Patient patient = patientService.select(firstName, midName, lastName, birthday);
 
-        if (patient == null) {
+        if (patient == null)
+        {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
+
         return patient;
     }
 
     @PutMapping(path = "{id}")
-    public void updatePatient(@PathVariable int id, @RequestBody Patient patient)
+    public Patient updatePatient(@PathVariable int id, @RequestBody Patient patient)
     {
-        if (id != patient.getId())
-        {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
-        patientService.update(id, patient);
+        return patientService.update(id, patient);
     }
 
     @DeleteMapping(path = "{id}")

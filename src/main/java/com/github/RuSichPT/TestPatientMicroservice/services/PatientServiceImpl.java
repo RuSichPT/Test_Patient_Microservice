@@ -15,8 +15,9 @@ public class PatientServiceImpl implements PatientService{
     @Autowired
     public PatientMapper patientMapper;
     @Override
-    public void insert(Patient patient) {
+    public Patient insert(Patient patient) {
         patientMapper.insert(patient);
+        return patientMapper.selectCurrentPatient();
     }
 
     @Override
@@ -30,8 +31,9 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Override
-    public void update(int id, Patient newPatient) {
+    public Patient update(int id, Patient newPatient) {
         Patient oldPatient = patientMapper.selectById(id);
+        newPatient.setId(id);
 
         if (oldPatient == null)
         {
@@ -39,10 +41,12 @@ public class PatientServiceImpl implements PatientService{
         }
         else if (newPatient.equals(oldPatient))
         {
-            return;
+            return oldPatient;
         }
 
         patientMapper.update(newPatient);
+
+        return select(id);
     }
 
     @Override
